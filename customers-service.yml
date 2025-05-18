@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: kubernetes
+  datasource:
+    url: jdbc:mysql://mysql.spring-petclinic.svc.cluster.local:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
+    username: petclinic
+    password: petclinic
+  sql:
+    init:
+      schema-locations: classpath*:db/mysql/schema.sql
+      data-locations: classpath*:db/mysql/data.sql
+      mode: ALWAYS
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server.spring-petclinic.svc.cluster.local:8761/eureka/
+
+server:
+  port: 8082

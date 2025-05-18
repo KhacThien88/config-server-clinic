@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: admin-server
+  boot:
+    admin:
+      ui:
+        title: PetClinic Admin
+      discovery:
+        enabled: true
+      client:
+        url: http://admin-server.spring-petclinic.svc.cluster.local:9090

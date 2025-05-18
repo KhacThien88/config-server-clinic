@@ -1,0 +1,27 @@
+spring:
+  config:
+    activate:
+      on-profile: default
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${pod-name}
+    prefer-ip-address: true
+    metadata-map:
+      k8s:
+        namespace: ${namespace}
+        pod-name: ${pod-name}
+        node-name: ${node-name}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: kubernetes
+server:
+  port: 8084
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server.spring-petclinic.svc.cluster.local:8761/eureka/
+    healthcheck:
+      enabled: true

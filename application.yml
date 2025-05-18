@@ -1,0 +1,35 @@
+server:
+  shutdown: graceful
+
+spring:
+  application:
+    name: ${APP_NAME}
+  cloud:
+    config:
+      allow-override: true
+      override-none: true
+  sleuth:
+    sampler:
+      probability: 1.0
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
