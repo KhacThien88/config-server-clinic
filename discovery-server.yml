@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    hostname: discovery-server.spring-petclinic.svc.cluster.local
+    hostname: discovery-server.spring-petclinic-staging.svc.cluster.local
   client:
     registerWithEureka: false
     fetchRegistry: false

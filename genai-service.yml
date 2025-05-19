@@ -22,6 +22,6 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://discovery-server.spring-petclinic.svc.cluster.local:8761/eureka/
+      defaultZone: http://discovery-server.spring-petclinic-staging.svc.cluster.local:8761/eureka/
     healthcheck:
       enabled: true

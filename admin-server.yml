@@ -8,4 +8,4 @@ spring:
       discovery:
         enabled: true
       client:
-        url: http://admin-server.spring-petclinic.svc.cluster.local:9090
+        url: http://admin-server.spring-petclinic-staging.svc.cluster.local:9090

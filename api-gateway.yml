@@ -6,19 +6,19 @@ spring:
     gateway:
       routes:
         - id: customers-service
-          uri: lb://customers-service.spring-petclinic.svc.cluster.local
+          uri: lb://customers-service.spring-petclinic-staging.svc.cluster.local
           predicates:
             - Path=/api/customer/**
         - id: visits-service
-          uri: lb://visits-service.spring-petclinic.svc.cluster.local
+          uri: lb://visits-service.spring-petclinic-staging.svc.cluster.local
           predicates:
             - Path=/api/visit/**
         - id: vets-service
-          uri: lb://vets-service.spring-petclinic.svc.cluster.local
+          uri: lb://vets-service.spring-petclinic-staging.svc.cluster.local
           predicates:
             - Path=/api/vet/**
         - id: api-gateway
-          uri: lb://api-gateway.spring-petclinic.svc.cluster.local
+          uri: lb://api-gateway.spring-petclinic-staging.svc.cluster.local
           predicates:
             - Path=/api/gateway/**
 
@@ -28,7 +28,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://discovery-server.spring-petclinic.svc.cluster.local:8761/eureka/
+      defaultZone: http://discovery-server.spring-petclinic-staging.svc.cluster.local:8761/eureka/
 
 management:
   endpoints:
