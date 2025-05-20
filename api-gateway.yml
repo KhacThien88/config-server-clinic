@@ -34,7 +34,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://discovery-server.spring-petclinic-staging.svc.cluster.local:8761/eureka/
+      defaultZone: http://clinic-staging-discovery.spring-petclinic-staging.svc.cluster.local:8761/eureka/
 
 management:
   endpoints:
