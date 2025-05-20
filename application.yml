@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: ${APP_NAME}
+    name: spring-clinic
   cloud:
     config:
       allow-override: true
