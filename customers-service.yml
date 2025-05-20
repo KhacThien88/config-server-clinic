@@ -1,15 +1,9 @@
 spring:
-  application:
-    name: customers-service
   config:
-    import: optional:configserver:http://config-server.spring-clinic.svc.cluster.local:8888
-    fail-fast: true
-    retry:
-      initial-interval: 1000
-      max-interval: 2000
-      max-attempts: 20
+    activate:
+      on-profile: kubernetes
   datasource:
-    url: jdbc:mysql://mysql.spring-clinic-staging.svc.cluster.local:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://mysql.spring-petclinic-staging.svc.cluster.local:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
     username: petclinic
     password: petclinic
   sql:
@@ -17,48 +11,11 @@ spring:
       schema-locations: classpath*:db/mysql/schema.sql
       data-locations: classpath*:db/mysql/data.sql
       mode: ALWAYS
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: none
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
-    healthcheck:
-      enabled: true
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${random.uuid}
-    metadata-map:
-      k8s:
-        namespace: ${spring.cloud.kubernetes.namespace}
-        pod-name: ${spring.cloud.kubernetes.pod-name}
-        node-name: ${spring.cloud.kubernetes.node-name}
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-  tracing:
-    sampling:
-      probability: 1.0
+
 server:
-  shutdown: graceful
----
-spring:
-  config:
-    activate:
-      on-profile: kubernetes
-  cloud:
-    config:
-      allow-override: true
-      override-none: true
-    kubernetes:
-      enabled: true
+  port: 8082

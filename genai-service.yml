@@ -1,45 +1,4 @@
 spring:
-  application:
-    name: genai-service
-  config:
-    import: optional:configserver:http://config-server.spring-clinic.svc.cluster.local:8888
-    fail-fast: true
-    retry:
-      initial-interval: 1000
-      max-interval: 2000
-      max-attempts: 20
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: none
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
-    healthcheck:
-      enabled: true
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}:${random.uuid}
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-  tracing:
-    sampling:
-      probability: 1.0
-server:
-  port: 8084
-  shutdown: graceful
----
-spring:
   config:
     activate:
       on-profile: default
@@ -52,23 +11,17 @@ eureka:
         namespace: ${namespace}
         pod-name: ${pod-name}
         node-name: ${node-name}
+
 ---
 spring:
   config:
     activate:
       on-profile: kubernetes
-  datasource:
-    url: jdbc:mysql://mysql.spring-clinic-staging.svc.cluster.local:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
-    username: petclinic
-    password: petclinic
-  sql:
-    init:
-      schema-locations: classpath*:db/mysql/schema.sql
-      data-locations: classpath*:db/mysql/data.sql
-      mode: ALWAYS
-  cloud:
-    config:
-      allow-override: true
-      override-none: true
-    kubernetes:
+server:
+  port: 8084
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://clinic-staging-discovery.spring-petclinic-staging.svc.cluster.local:8761/eureka/
+    healthcheck:
       enabled: true
