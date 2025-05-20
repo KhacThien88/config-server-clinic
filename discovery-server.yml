@@ -1,8 +1,6 @@
-server:
-  port: 8761
 spring:
   application:
-    name: clinic-staging-discovery
+    name: discover-server
   config:
     import: configserver:http://config-server.spring-clinic.svc.cluster.local:8888
     fail-fast: true
