@@ -8,7 +8,7 @@ spring:
       discovery:
         enabled: true
       client:
-        url: http://admin-server.spring-petclinic-staging.svc.cluster.local:9090
+        url: http://clinic-staging-admin.spring-petclinic-staging.svc.cluster.local:9090
 
 eureka:
   client:
