@@ -4,6 +4,8 @@ vets:
     heap-size: 100
 
 spring:
+  application:
+    name: vets-service
   config:
     activate:
       on-profile: kubernetes
