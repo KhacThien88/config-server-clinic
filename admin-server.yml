@@ -14,3 +14,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
+  
+
+server:
+  port: 9090

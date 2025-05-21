@@ -11,6 +11,13 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-petclinic-staging.svc.cluster.local:8761/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  server:
+    enable-self-preservation: true
+    peer-node-read-timeout-ms: 10000
+    response-cache-update-interval-ms: 30000
 
 server:
   port: 8082
