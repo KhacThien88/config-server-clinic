@@ -41,6 +41,11 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
     leaseExpirationDurationInSeconds: 30
+  logging:
+    level:
+      com.netflix.discovery: DEBUG
+      org.springframework.cloud.gateway: DEBUG
+      org.springframework.cloud.netflix.eureka: DEBUG
 
 management:
   endpoints:
