@@ -9,3 +9,6 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
+  server:
+    enableSelfPreservation: false
+    peer-node-read-timeout-ms: 10000
