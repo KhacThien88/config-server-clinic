@@ -4,6 +4,7 @@ spring:
   config:
     activate:
       on-profile: default
+  
 eureka:
   instance:
     instance-id: ${spring.application.name}:${pod-name}

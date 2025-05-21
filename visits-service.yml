@@ -8,6 +8,8 @@ spring:
     url: jdbc:mysql://mysql.spring-petclinic-staging.svc.cluster.local:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
     username: petclinic
     password: petclinic
+  zipkin:
+    base-url: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411
 
 eureka:
   client:

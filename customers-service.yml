@@ -13,7 +13,8 @@ spring:
       schema-locations: classpath*:db/mysql/schema.sql
       data-locations: classpath*:db/mysql/data.sql
       mode: ALWAYS
-
+  zipkin:
+    base-url: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411
 eureka:
   instance:
     hostname: clinic-staging-customer.spring-clinic-staging.svc.cluster.local
