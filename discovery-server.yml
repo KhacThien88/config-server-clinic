@@ -10,5 +10,6 @@ eureka:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
   server:
-    enableSelfPreservation: false
-    peer-node-read-timeout-ms: 10000
+    enableSelfPreservation: true
+    peerNodeReadTimeoutMs: 10000
+    peerEurekaNodesUpdateIntervalMs: 60000
