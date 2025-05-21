@@ -12,6 +12,10 @@ eureka:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-petclinic-staging.svc.cluster.local:8761/eureka/
   instance:
+    hostname: clinic-staging-visits.spring-clinic-staging.svc.cluster.local
+    prefer-ip-address: false
+    metadata-map:
+      namespace: spring-clinic-staging
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90
   server:

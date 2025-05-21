@@ -39,6 +39,10 @@ eureka:
     instanceInfoReplicationIntervalSeconds: 10
     initialInstanceInfoReplicationIntervalSeconds: 30
   instance:
+    hostname: clinic-staging-apigateway.spring-clinic-staging.svc.cluster.local
+    prefer-ip-address: false
+    metadata-map:
+      namespace: spring-clinic-staging
     leaseRenewalIntervalInSeconds: 10
     leaseExpirationDurationInSeconds: 30
   logging:

@@ -11,6 +11,11 @@ spring:
         url: http://clinic-staging-admin.spring-petclinic-staging.svc.cluster.local:9090
 
 eureka:
+  instance:
+    hostname: clinic-staging-admin.spring-clinic-staging.svc.cluster.local
+    prefer-ip-address: false
+    metadata-map:
+      namespace: spring-clinic-staging
   client:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/

@@ -20,6 +20,13 @@ spring:
 server:
   port: 8084
 eureka:
+  instance:
+    hostname: clinic-staging-genai.spring-clinic-staging.svc.cluster.local
+    prefer-ip-address: false
+    metadata-map:
+      namespace: spring-clinic-staging
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
   client:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-petclinic-staging.svc.cluster.local:8761/eureka/
