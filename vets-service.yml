@@ -15,6 +15,7 @@ spring:
     password: petclinic
   zipkin:
     base-url: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411
+    enable: true
 
 eureka:
   instance:
