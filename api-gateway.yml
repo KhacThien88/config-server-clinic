@@ -6,25 +6,25 @@ spring:
     gateway:
       routes:
         - id: clinic-staging-vets
-          uri: lb://clinic-staging-vets.spring-clinic-staging.svc.cluster.local
+          uri: http://clinic-staging-vets.spring-clinic-staging.svc.cluster.local:8083
           predicates:
             - Path=/api/vet/**
           filters:
             - StripPrefix=2
         - id: clinic-staging-visits
-          uri: lb://clinic-staging-visits.spring-clinic-staging.svc.cluster.local
+          uri: http://clinic-staging-visits.spring-clinic-staging.svc.cluster.local:8082
           predicates:
             - Path=/api/visit/**
           filters:
             - StripPrefix=2
         - id: clinic-staging-customer
-          uri: lb://clinic-staging-customer.spring-clinic-staging.svc.cluster.local
+          uri: http://clinic-staging-customer.spring-clinic-staging.svc.cluster.local:8081
           predicates:
             - Path=/api/customer/**
           filters:
             - StripPrefix=2
         - id: clinic-staging-genai
-          uri: lb://clinic-staging-genai.spring-clinic-staging.svc.cluster.local
+          uri: http://clinic-staging-genai.spring-clinic-staging.svc.cluster.local:8084
           predicates:
             - Path=/api/genai/**
 

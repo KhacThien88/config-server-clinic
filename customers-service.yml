@@ -28,7 +28,7 @@ eureka:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
 server:
-  port: 8082
+  port: 8081
 logging:
   level:
     org.springframework.boot: DEBUG
