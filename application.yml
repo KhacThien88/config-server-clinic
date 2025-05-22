@@ -1,68 +1,86 @@
 # COMMON APPLICATION PROPERTIES
 
 server:
-  # start services on random port by default
-  port: 0
-  # The stop processing uses a timeout which provides a grace period during which existing requests will be allowed to complete but no new requests will be permitted
-  shutdown: graceful
+  port: 0  # Random port for Docker compatibility
+  shutdown: graceful  # Graceful shutdown for handling existing requests
 
-# embedded database init, supports mysql too trough the 'mysql' spring profile
 spring:
-  sql:
-    init:
-      schema-locations: classpath*:db/hsqldb/schema.sql
-      data-locations: classpath*:db/hsqldb/data.sql
+  application:
+    name: spring-clinic
+  cloud:
+    config:
+      allow-override: true
+      override-none: true
   sleuth:
     sampler:
       probability: 1.0
-  cloud:
-    config:
-      # Allow the microservices to override the remote properties with their own System properties or config file
-      allow-override: true
-      # Override configuration with any local property source
-      override-none: true
   jpa:
     open-in-view: false
     hibernate:
       ddl-auto: none
+  zipkin:
+    base-url: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411/
+    enabled: true
+  sql:
+    init:
+      schema-locations: classpath*:db/hsqldb/schema.sql
+      data-locations: classpath*:db/hsqldb/data.sql
+      mode: ALWAYS  # Initialize database on startup
+  config:
+    activate:
+      on-profile: mysql
+  datasource:
+    url: jdbc:mysql://mysql:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: petclinic
 
-# Spring Boot 1.5 makes actuator secure by default
-management.security.enabled: false
-# Enable all Actuators and not only the two available by default /health and /info starting Spring Boot 2.0
-management.endpoints.web.exposure.include: "*"
-
-spring.cloud.refresh.refreshable: false
-
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
+    registryFetchIntervalSeconds: 10
+    instanceInfoReplicationIntervalSeconds: 10
+    initialInstanceInfoReplicationIntervalSeconds: 30
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
 
 # Logging
-logging.level.org.springframework: INFO
+logging:
+  level:
+    org.springframework: INFO
 
-# Metrics
+# Metrics and Monitoring
 management:
+  security:
+    enabled: false  # Disable actuator security
+  endpoints:
+    web:
+      exposure:
+        include: '*'  # Expose all actuator endpoints
   endpoint:
     metrics:
       enabled: true
     prometheus:
       enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: '*'
   metrics:
     export:
       prometheus:
         enabled: true
   tracing:
     sampling:
-      probability: 1
+      probability: 1.0
 
-
+# Chaos Engineering (optional profile)
 ---
 spring:
   config:
     activate:
-      on-profile: chaos-monkey      
-management.endpoint.chaosmonkey.enabled: true
+      on-profile: chaos-monkey
+management:
+  endpoint:
+    chaosmonkey:
+      enabled: true
 chaos:
   monkey:
     enabled: true
@@ -73,15 +91,12 @@ chaos:
       rest-controller: false
       service: false
 
+# MySQL profile (already included in main config for Docker)
 ---
 spring:
   config:
     activate:
       on-profile: mysql
-  datasource:
-    url: jdbc:mysql://localhost:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
-    username: root
-    password: petclinic
   sql:
     init:
       schema-locations: classpath*:db/mysql/schema.sql
