@@ -26,13 +26,7 @@ spring:
       schema-locations: classpath*:db/hsqldb/schema.sql
       data-locations: classpath*:db/hsqldb/data.sql
       mode: ALWAYS  # Initialize database on startup
-  config:
-    activate:
-      on-profile: mysql
-  datasource:
-    url: jdbc:mysql://mysql:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false
-    username: root
-    password: petclinic
+  
 
 eureka:
   client:
