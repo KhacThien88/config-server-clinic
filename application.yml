@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: spring-clinic
+    name: api-gateway
   cloud:
     config:
       allow-override: true
