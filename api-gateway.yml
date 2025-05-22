@@ -4,6 +4,16 @@ server:
 spring:
   cloud:
     gateway:
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: defaultCircuitBreaker
+            fallbackUri: forward:/fallback
+        - name: Retry
+          args:
+            retries: 1
+            statuses: SERVICE_UNAVAILABLE
+            methods: POST
       routes:
         - id: clinic-staging-vets
           uri: http://clinic-staging-vets.spring-clinic-staging.svc.cluster.local:8083
@@ -27,6 +37,9 @@ spring:
           uri: http://clinic-staging-genai.spring-clinic-staging.svc.cluster.local:8084
           predicates:
             - Path=/api/genai/**
+          filters:
+            - StripPrefix=2
+            - CircuitBreaker=name=genaiCircuitBreaker,fallbackUri=/fallback
 
   config:
     activate:
