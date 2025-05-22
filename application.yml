@@ -16,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: none
   zipkin:
-    baseUrl: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411/
+    base-url: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411/
     enabled: true    
 
 eureka:
@@ -29,16 +29,3 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
     leaseExpirationDurationInSeconds: 30
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-  tracing:
-    sampling:
-      probability: 1.0
