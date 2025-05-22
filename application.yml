@@ -1,6 +1,3 @@
-server:
-  shutdown: graceful
-
 spring:
   application:
     name: api-gateway
@@ -8,6 +5,43 @@ spring:
     config:
       allow-override: true
       override-none: true
+    gateway:
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: defaultCircuitBreaker
+            fallbackUri: forward:/fallback
+        - name: Retry
+          args:
+            retries: 3
+            statuses: SERVICE_UNAVAILABLE, GATEWAY_TIMEOUT
+            methods: GET, POST
+      routes:
+        - id: clinic-staging-customer
+          uri: lb://clinic-staging-customer
+          predicates:
+            - Path=/api/customer/**
+          filters:
+            - StripPrefix=2
+        - id: clinic-staging-vets
+          uri: lb://clinic-staging-vets
+          predicates:
+            - Path=/api/vet/**
+          filters:
+            - StripPrefix=2
+        - id: clinic-staging-visits
+          uri: lb://clinic-staging-visits
+          predicates:
+            - Path=/api/visit/**
+          filters:
+            - StripPrefix=2
+        - id: clinic-staging-genai
+          uri: lb://clinic-staging-genai
+          predicates:
+            - Path=/api/genai/**
+          filters:
+            - StripPrefix=2
+            - CircuitBreaker=name=genaiCircuitBreaker,fallbackUri=/fallback
   sleuth:
     sampler:
       probability: 1.0
@@ -17,8 +51,7 @@ spring:
       ddl-auto: none
   zipkin:
     base-url: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411/
-    enabled: true    
-
+    enabled: true
 eureka:
   client:
     serviceUrl:
@@ -29,3 +62,13 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
     leaseExpirationDurationInSeconds: 30
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: DEBUG
+---
+spring:
+  config:
+    activate:
+      on-profile: kubernetes,docker
+    import: configserver:http://config-server.spring-clinic.svc.cluster.local:8888
