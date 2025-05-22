@@ -26,6 +26,9 @@ eureka:
     enable-self-preservation: true
     peer-node-read-timeout-ms: 10000
     response-cache-update-interval-ms: 30000
-
+management:
+  zipkin:
+    tracing:
+      endpoint: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411/api/v2/spans
 server:
   port: 8082
