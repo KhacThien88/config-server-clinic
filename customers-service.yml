@@ -27,9 +27,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://clinic-staging-discovery.spring-clinic-staging.svc.cluster.local:8761/eureka/
-management:
-  zipkin:
-    tracing:
-      endpoint: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411/api/v2/spans
 server:
   port: 8082
+logging:
+  level:
+    org.springframework.boot: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
+    org.springframework.cloud.config: DEBUG
+    zipkin2: DEBUG
