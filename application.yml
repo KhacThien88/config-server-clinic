@@ -16,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: none
   zipkin:
-    base-url: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411
+    baseUrl: http://clinic-staging-zipkin.spring-clinic-staging.svc.cluster.local:9411/
     enabled: true    
 
 eureka:
