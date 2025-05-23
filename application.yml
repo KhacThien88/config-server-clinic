@@ -1,7 +1,6 @@
 # COMMON APPLICATION PROPERTIES
 
 server:
-  port: 0  # Random port for Docker compatibility
   shutdown: graceful  # Graceful shutdown for handling existing requests
 
 spring:
